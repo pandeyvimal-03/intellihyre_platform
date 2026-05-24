@@ -1,5 +1,4 @@
 // platform/src/services/profileServiceTypes.ts
-import { Role } from '@/store/authStore';
 
 export interface CandidateProfile {
   id: number;
@@ -8,6 +7,7 @@ export interface CandidateProfile {
   resume_path?: string;
   desired_role?: string;
   job_mode: 'REMOTE' | 'ONSITE' | 'HYBRID' | 'ANY';
+  mobile_no?: string; // Add this
 }
 
 export interface RecruiterProfile {

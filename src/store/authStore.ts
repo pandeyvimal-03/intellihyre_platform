@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 import { CandidateProfile, RecruiterProfile } from '@/services/profileServiceTypes'; // New import for types
 
-type UserRoleBackend = 'CANDIDATE' | 'RECRUITER' | 'ADMIN';
+export type UserRoleBackend = 'CANDIDATE' | 'RECRUITER' | 'ADMIN';
 
-interface User {
+export interface User {
   id: number;
   email: string;
   name: string;

@@ -20,7 +20,7 @@ const jobSchema = z.object({
   work_mode: z.enum(['REMOTE', 'ONSITE', 'HYBRID', 'ANY']),
   location: z.string().min(2, 'Location is required'),
   salary_range: z.string().min(1, 'Salary range is required'),
-  experience_required: z.coerce.number().min(0, 'Experience must be a number'),
+  experience_required: z.string().min(1, 'Experience is required'), // Changed to string
   skills_required: z.string().min(3, 'Skills are required'),
   description: z.string().min(20, 'Description must be at least 20 characters'),
 });
@@ -47,7 +47,7 @@ const EditJobPage = () => {
         work_mode: job.work_mode,
         location: job.location,
         salary_range: job.salary_range || '',
-        experience_required: Number(job.experience_required),
+        experience_required: String(job.experience_required), // Convert to string
         skills_required: job.skills_required,
         description: job.description,
       });
@@ -58,7 +58,6 @@ const EditJobPage = () => {
     try {
       await jobService.update(Number(id), {
         ...values,
-        experience_required: values.experience_required.toString(),
       });
       navigate(`/recruiter/jobs/${id}`);
     } catch (error) {
@@ -118,7 +117,7 @@ const EditJobPage = () => {
                 <FormField control={form.control} name="experience_required" render={({ field }) => (
                     <FormItem>
                         <FormLabel>Experience Required (Years)</FormLabel>
-                        <FormControl><Input type="number" step="0.1" {...field} /></FormControl>
+                        <FormControl><Input type="text" {...field} /></FormControl>
                         <FormMessage />
                     </FormItem>
                 )} />

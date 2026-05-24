@@ -100,7 +100,7 @@ const CandidateDashboard = () => {
 
 const jobColumns: ColumnDef<Job>[] = [
   { accessorKey: "title", header: "Job Title", cell: ({ row }) => (<div className="flex flex-col"><span className="font-medium">{row.original.title}</span></div>) },
-  { accessorKey: "status", header: "Status", cell: ({ row }) => (<Badge variant={row.original.status === 'active' ? 'default' : 'secondary'}>{row.original.status}</Badge>) },
+  { accessorKey: "status", header: "Status", cell: ({ row }) => (<Badge variant={String(row.original.status) === 'active' ? 'default' : 'secondary'}>{row.original.status}</Badge>) },
   { accessorKey: "experience_required", header: "Experience" },
 ];
 

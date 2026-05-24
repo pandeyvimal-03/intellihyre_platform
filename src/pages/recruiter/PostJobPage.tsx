@@ -26,7 +26,7 @@ const jobSchema = z.object({
   work_mode: z.enum(['REMOTE', 'ONSITE', 'HYBRID', 'ANY']),
   location: z.string().min(2, 'Location is required'),
   salary_range: z.string().min(1, 'Salary range is required'),
-  experience_required: z.coerce.number().min(0, 'Experience (in years) must be a number'),
+  experience_required: z.string().min(1, 'Experience (in years) is required'), // Changed to string
   skills_required: z.string().min(3, 'Skills are required'),
   description: z.string().min(20, 'Description must be at least 20 characters'),
 });
@@ -43,7 +43,7 @@ const PostJobPage = () => {
       work_mode: 'ANY',
       location: '',
       salary_range: '',
-      experience_required: 0 as any,
+      experience_required: '', // Changed to string
       skills_required: '',
       description: '',
     },
@@ -53,7 +53,6 @@ const PostJobPage = () => {
     try {
       await jobService.create({
         ...values,
-        experience_required: values.experience_required.toString(),
         status: JobStatus.ACTIVE,
       });
       navigate('/recruiter/jobs');
@@ -137,7 +136,7 @@ const PostJobPage = () => {
                 <FormField control={form.control} name="experience_required" render={({ field }) => (
                     <FormItem>
                         <FormLabel>Experience Required (Years)</FormLabel>
-                        <FormControl><Input type="number" step="0.1" placeholder="e.g. 3.5" {...field} /></FormControl>
+                        <FormControl><Input type="text" placeholder="e.g. 3.5" {...field} /></FormControl>
                         <FormMessage />
                     </FormItem>
                 )} />
