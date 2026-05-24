@@ -226,7 +226,11 @@ function App() {
       try {
         const response = await api.get('/auth/me');
         setAuth(response.data);
-      } catch (error) {
+      } catch (error: any) {
+        // Log error only if it's not an auth failure
+        if (error.response?.status !== 401) {
+            console.error('Auth check failed:', error);
+        }
         setAuth(null); 
       } finally {
         setLoading(false);
